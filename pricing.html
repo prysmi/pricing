@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prysmi | Salesforce Partner Engagements</title>
+    
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Load On-Brand Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Libre+Franklin:wght@200;400;600;800;900&display=swap" rel="stylesheet">
+
+    <!-- 3. Inlined CSS for Brand Consistency -->
+    <style>
+        /* === Brand Colors & Theme === */
+        :root {
+            --color-bg-body: #0A0A0A;
+            --color-text-primary: #E0E0E0;
+            --color-text-heading: #FFFFFF;
+            --color-accent-pink: #F53196;
+            --color-accent-lime: #EEFF41;
+            --color-border-default: #333;
+            --color-bg-section: rgba(26, 26, 26, 0.75);
+        }
+        
+        /* Note: Light mode is defined but dark is default */
+        body.light-mode {
+            --color-bg-body: #F5F5F5;
+            --color-text-primary: #333333;
+            --color-text-heading: #0A0A0A;
+            --color-border-default: #CCCCCC;
+            --color-bg-section: rgba(255, 255, 255, 0.75);
+        }
+
+        /* === Base Typography === */
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            background-color: var(--color-bg-body);
+            color: var(--color-text-primary);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-weight: 900; /* font-black */
+            color: var(--color-text-heading);
+        }
+        /* The brand's signature italic emphasis */
+        .text-emphasis-italic-bold {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-weight: 400; /* Baskerville's italic is bold by default */
+        }
+        .text-prysmi-pink {
+            color: var(--color-accent-pink);
+        }
+        .text-prysmi-lime {
+            color: var(--color-accent-lime);
+        }
+
+        /* === "Glassmorphic" Card Component === */
+        .pm-card {
+             background-color: var(--color-bg-section);
+             border: 1px solid var(--color-border-default);
+             backdrop-filter: blur(10px);
+             -webkit-backdrop-filter: blur(10px);
+             border-radius: 0.75rem; /* rounded-xl */
+             transition: all 0.3s ease;
+        }
+        .pm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 49, 150, 0.1);
+            border-color: rgba(245, 49, 150, 0.5);
+        }
+
+        /* === Slide Deck Structure === */
+        .slide {
+            display: flex; /* Changed from 'none' to 'flex' */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            padding: 4rem 2rem;
+            /* animation: fadeIn 0.8s ease-in-out; */ /* Animation removed */
+            margin-bottom: 2rem; /* Added space between slides */
+        }
+        /* .slide.active { ... } */ /* Removed .active state */
+        
+        /* @keyframes fadeIn { ... } */ /* Removed keyframes */
+
+        /* === Checklist Style === */
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+        .checklist-item::before {
+            content: '☑';
+            color: var(--color-accent-pink);
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: -2px;
+        }
+
+        /* === Navigation Buttons === */
+        .nav-button {
+            background-color: var(--color-bg-section);
+            border: 1px solid var(--color-border-default);
+            color: var(--color-text-primary);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            font-size: 1.5rem;
+            transition: all 0.2s ease;
+        }
+        .nav-button:hover {
+            background-color: var(--color-accent-pink);
+            border-color: var(--color-accent-pink);
+            color: var(--color-text-heading);
+            transform: scale(1.1);
+        }
+        .nav-button:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+        
+        /* === Hero Title Glow === */
+        @keyframes pulseGlow {
+            0%, 100% { text-shadow: 0 0 7px rgba(255, 255, 255, 0.7), 0 0 14px rgba(255, 255, 255, 0.5), 0 0 20px rgba(245, 49, 150, 0.3); }
+            50% { text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(245, 49, 150, 0.5); }
+        }
+        .hero-title-glow {
+            animation: pulseGlow 3.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased"> <!-- Removed overflow-hidden -->
+
+    <!-- Main Slide Container -->
+    <div id="slideContainer" class="w-full"> <!-- Removed h-screen and overflow classes -->
+
+        <!-- Slide 0: Cover Page -->
+        <div class="slide text-center">
+            <div class="max-w-4xl mx-auto">
+                <!-- Logo -->
+                <img src="https://prysmi.com/assets/trademarks/logos/logo-horizontal-pink.webp" 
+                     alt="Prysmi Logo" 
+                     class="w-64 h-auto mx-auto mb-12"
+                     onerror="this.onerror=null;this.src='https://placehold.co/256x80/0A0A0A/F53196?text=PRYSMI';">
+                
+                <h1 class="text-5xl md:text-7xl font-black text-white hero-title-glow">
+                    Fractional GTM Partnership
+                </h1>
+                <p class="text-3xl md:text-5xl text-emphasis-italic-bold text-prysmi-lime mt-6">
+                    Salesforce Gold Partner Edition
+                </p>
+                <p class="text-lg md:text-xl text-gray-400 mt-10 leading-relaxed max-w-xl mx-auto">
+                    Strategic frameworks for partners who build beyond the commodity.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl">You're Not Just a Vendor.</h2>
+                <p class="text-2xl md:text-4xl text-emphasis-italic-bold text-prysmi-pink mt-4">
+                    Stop letting your marketing make you look like one.
+                </p>
+                <p class="text-lg md:text-xl text-gray-300 mt-8 leading-relaxed max-w-2xl mx-auto">
+                    Standing out in the Salesforce ecosystem is brutal. You have a world-class product, but you're lost in the AppExchange noise, fighting for visibility against partners who compete on price, not value.
+                    <br><br>
+                    <span class="text-white font-semibold">Your marketing needs to do more than generate leads. It needs to build authority, communicate premium value, and create a predictable pipeline of high-ACV clients.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Option 1 (Bi-Weekly Advisory) -->
+        <div class="slide">
+            <div class="pm-card w-full max-w-4xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <h3 class="text-prysmi-lime text-sm uppercase tracking-widest font-semibold">Option 1</h3>
+                        <h2 class="text-3xl md:text-4xl mt-2">Fractional GTM Advisory</h2>
+                        <p class="text-lg text-emphasis-italic-bold text-gray-300 mt-2">Your Embedded Strategic Sounding Board</p>
+                        
+                        <h4 class="text-white font-semibold mt-8 mb-4">WHAT YOU GET:</h4>
+                        <ul class="space-y-3">
+                            <li class="checklist-item">8+ Hourly Strategy/Advisory Calls Per Week</li>
+                            <li class="checklist-item">Continuous GTM & Messaging Review Support</li>
+                            <li class="checklist-item">On-Demand Access (Email/Slack) for Feedback & Direction</li>
+                        </ul>
+                    </div>
+                    <div class="border-t md:border-t-0 md:border-l border-gray-700 pt-8 md:pt-0 md:pl-8">
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest">Fee</h3>
+                        <p class="text-3xl md:text-4xl font-black text-white mt-2 whitespace-nowrap">₹1,00,000</p>
+                        <p class="text-xl font-semibold text-gray-300">/ month</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Structure</h3>
+                        <p class="text-white mt-2">6-Month Engagement</p>
+                        <p class="text-gray-400 text-sm">(First month standalone trial, then 5-month retainer of ₹5,00,000)</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Ideal For:</h3>
+                        <p class="text-white mt-2 font-semibold">Leadership teams needing ongoing, high-level input and course correction without deep operational involvement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Option 2 (Complete 6-Month Project) -->
+        <div class="slide">
+            <div class="pm-card w-full max-w-4xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <h3 class="text-prysmi-lime text-sm uppercase tracking-widest font-semibold">Option 2</h3>
+                        <h2 class="text-3xl md:text-4xl mt-2">Total GTM Transformation</h2>
+                        <p class="text-lg text-emphasis-italic-bold text-gray-300 mt-2">The 6-Month 'Done-For-You' GTM Foundation</p>
+                        
+                        <h4 class="text-white font-semibold mt-8 mb-4">WHAT YOU GET:</h4>
+                        <ul class="space-y-3">
+                            <li class="checklist-item">Full GTM Narrative & Positioning Framework</li>
+                            <li class="checklist-item">Messaging Architecture, ICP Mapping & Campaign Direction</li>
+                            <li class="checklist-item">Weekly Stand-up & Mid-Week Check-in Calls for Alignment</li>
+                            <li class="checklist-item">Infinite Revisions (up to 1 month after project completion)</li>
+                        </ul>
+                    </div>
+                    <div class="border-t md:border-t-0 md:border-l border-gray-700 pt-8 md:pt-0 md:pl-8">
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest">Fee</h3>
+                        <p class="text-3xl md:text-4xl font-black text-white mt-2 whitespace-nowrap">₹15,00,000</p>
+                        <p class="text-xl font-semibold text-gray-300">Total Project</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Payment Terms</h3>
+                        <p class="text-white mt-2">₹5,00,000 Upfront</p>
+                        <p class="text-white">₹10,00,000 upon 90% completion of first milestone</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Ideal For:</h3>
+                        <p class="text-white mt-2 font-semibold">Companies seeking a complete overhaul of their GTM story, messaging, and campaign foundation with close collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Option 3 (Annual Retainer) -->
+        <div class="slide">
+            <div class="pm-card w-full max-w-4xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <h3 class="text-prysmi-lime text-sm uppercase tracking-widest font-semibold">Option 3</h3>
+                        <h2 class="text-3xl md:text-4xl mt-2">Embedded Strategic Partner</h2>
+                        <p class="text-lg text-emphasis-italic-bold text-gray-300 mt-2">Your GTM as a Compounding, In-House Asset</p>
+                        
+                        <h4 class="text-white font-semibold mt-8 mb-4">WHAT YOU GET:</h4>
+                        <ul class="space-y-3">
+                            <li class="checklist-item">Year-long Strategic Partnership & GTM Oversight</li>
+                            <li class="checklist-item">Full Knowledge Transfer & Internal Team Training</li>
+                            <li class="checklist-item">In-House, Repeatable Strategies & Best Practices Library</li>
+                            <li class="checklist-item">Infinite Revisions & Direction Support Throughout the Year</li>
+                        </ul>
+                    </div>
+                    <div class="border-t md:border-t-0 md:border-l border-gray-700 pt-8 md:pt-0 md:pl-8">
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest">Fee</h3>
+                        <p class="text-3xl md:text-4xl font-black text-white mt-2 whitespace-nowrap">₹20,00,000</p>
+                        <p class="text-xl font-semibold text-gray-300">Annual</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Payment Terms</h3>
+                        <p class="text-white mt-2">Paid Fully Upfront</p>
+                        <p class="text-prysmi-lime text-sm font-semibold">(Represents a 33% cost savings vs. 6-month equivalent)</p>
+
+                        <h3 class="text-gray-400 text-sm uppercase tracking-widest mt-8">Ideal For:</h3>
+                        <p class="text-white mt-2 font-semibold">Mature Salesforce partners who want retained strategic direction, internal upskilling, and long-term consistency in GTM execution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Custom Engagements -->
+        <div class="slide">
+            <div class="pm-card w-full max-w-4xl p-8 md:p-12 text-center">
+                <h3 class="text-prysmi-lime text-lg uppercase tracking-widest font-semibold">Custom Engagements</h3>
+                <h2 class="text-3xl md:text-4xl mt-4">Need a Bespoke Solution?</h2>
+                <p class="text-lg text-emphasis-italic-bold text-gray-300 mt-2">Let's build a plan that maps directly to your unique goals.</p>
+                
+                <p class="text-lg text-gray-300 mt-8 max-w-xl mx-auto">
+                    If these packages don't fit your exact needs—whether it's a one-off AppExchange listing revamp, a sales-enablement sprint, or pure brand positioning—we can build a custom engagement.
+                </p>
+    
+                <div class="mt-8 pt-8 border-t border-gray-700">
+                    <p class="text-white font-semibold text-xl">The right solution starts with a conversation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Next Steps (CTA) -->
+        <div class="slide text-center">
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg sm:text-xl text-white text-emphasis-italic-bold opacity-90">Ready to stop guessing?</p>
+                <h2 class="text-3xl sm:text-5xl md:text-6xl font-black text-white hero-title-glow">
+                    Let’s Talk Strategy.
+                </h2>
+                <p class="mt-4 text-lg sm:text-xl text-white opacity-90">
+                    These models are starting points. The right solution comes from conversation.
+                </p>
+                
+                <!-- Custom Engagements (Removed from here) -->
+        
+                <!-- Contact Info -->
+                <div class="mt-10 border-t border-gray-700 pt-8 max-w-2xl mx-auto">
+                    <h3 class="text-gray-400 text-sm uppercase tracking-widest mb-4">Get in Touch</h3>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-lg">
+                        <a href="mailto:prabhjot@prysmi.com" class="text-white hover:text-prysmi-pink transition-colors whitespace-nowrap">
+                            ✉️ prabhjot@prysmi.com
+                        </a>
+                        <span class="text-gray-600 hidden sm:inline">|</span>
+                        <a href="tel:+918130752649" class="text-white hover:text-prysmi-pink transition-colors whitespace-nowrap">
+                            📞 +91 81307 52649
+                        </a>
+                        <span class="text-gray-600 hidden sm:inline">|</span>
+                        <a href="https://www.linkedin.com/in/b2bitcontent/" target="_blank" class="text-white hover:text-prysmi-pink transition-colors whitespace-nowrap">
+                            🔗 LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Global Navigation -->
+    <!-- Removed Navigation Buttons -->
+
+    <!-- Removed JavaScript block for slide navigation -->
+
+</body>
+</html>
+
+
+
